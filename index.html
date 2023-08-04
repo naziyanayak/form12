@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Resume Generator</title>
+  <style>
+    body {
+      font-family: sans-serif;
+    }
+
+    h1 {
+      text-align: center;
+    }
+
+    .container {
+      width: 700px;
+      margin: 0 auto;
+    }
+
+    a {
+      text-decoration: none;
+    }
+
+    .template {
+      display: none;
+      background-color: #f0f0f0;
+      padding: 20px;
+}
+.template * {
+  border: 3px solid #000000;
+}
+
+    .template.active {
+      display: block;
+    }
+
+    #download {
+      position: fixed;
+      bottom: 10px;
+      right: 10px;
+      color: #fff;
+      background-color: #000;
+      padding: 10px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+.template {
+  display: none;
+  background-color: #cceeff;
+  padding: 20px;
+}
+.template * {
+  border: none;
+}
+ table cells */
+  .template1 td,
+  .template2 td {
+    border: none;
+    padding: 5px; 
+  } 
+  .template1 {
+      background-color: #f0f0f0; /* Light gray color for Template 1 */
+      padding: 20px;
+      border: 3px solid #000000;
+    }
+    .template2 {
+      background-color: #cceeff; /* Light blue color for Template 2 */
+      padding: 20px;
+      border: 3px solid #000000;
+    }
+    textarea {
+  background-color: transparent;
+  border: none;
+}
+
+/* Add this additional CSS for hiding borders inside the tables */
+.template1 table,
+.template1 th,
+.template1 td {
+  border: none; /* Remove borders from tables, table headers, and table cells */
+}
+body {
+  background-color: white;
+}
+
+.template {
+  background-color: white;
+}
+
+  </style>
+</head>
+<body>
+
+  <h1>Resume Generator</h1>
+  <div class="container">
+    <h2>Choose a template</h2>
+    <ul>
+      <li><a href="#" onclick="showTemplate(0)">Template 1</a></li>
+      <li><a href="#" onclick="showTemplate(1)">Template 2</a></li>
+    </ul>
+    <div class="template" id="template1">
+      <h3>Template 1</h3>
+      <div class="template1">
+        <div style="display: flex; align-items: center; gap: 5px;">
+          <label style="font-size: 15px;"><b>First-Name :</b></label><br>
+          <textarea rows="2" cols="30" id="f_name" placeholder="First Name" style="font-size: 14px;" required oninput="validateFirstName(this)"></textarea>
+          <div style="margin-top: 5px; font-size:15px; color:red;" id="fname_error"></div>
+          </div>
+          <span id="fname_error" style="color: red;"></span>
+          <script>
+              function validateFirstName(input) {
+                  var validCharacters = /^[A-Za-z ]+$/;
+          
+                  if (!validCharacters.test(input.value)) {
+                      document.getElementById("fname_error").textContent = "Please enter alphabets only.";
+                      input.value = input.value.replace(/[^A-Za-z ]/g, '');
+                  } else {
+                      document.getElementById("fname_error").textContent = "";
+                  }
+              }
+          </script>
+      
+          <div style="display: flex; align-items: center; gap: 10px;">
+          <label style="font-size: 15px;"><b>Last-Name :</b></label><br>
+          <textarea rows="2" cols="30" id="l_name" placeholder="Last Name" style="font-size: 14px;" required oninput="validateLastName(this)"></textarea>
+          <div style="margin-top: 5px; font-size:18px; color:red;" id="lname_error"></div>
+          </div>
+          <span id="lname_error" style="color: red;"></span>
+          <script>
+            function validateLastName(input) {
+                var validCharacters = /^[A-Za-z ]+$/;
+              
+                if (!validCharacters.test(input.value)) {
+                    document.getElementById("lname_error").textContent = "Please enter alphabets only.";
+                    input.value = input.value.replace(/[^A-Za-z ]/g, '');
+                  } else {
+                    document.getElementById("lname_error").textContent = "";
+                }
+              }
+          </script>
+
+          <div style="display: flex; align-items: center; gap: 10px;">   
+          <label style="font-size: 15px;"><b>Father-Name :</b></label><br>
+          <textarea rows="2" cols="30" id="ft_name" placeholder="Father's Name" style="font-size: 14px;" required oninput="validateFatherName(this)"></textarea>
+          <div style="margin-top: 5px; font-size:18px; color:red;" id="fhname_error"></div>
+          </div>
+          <span id="fhname_error" style="color: red;"></span>
+          <script>
+          function validateFatherName(input) {
+          var validCharacters = /^[A-Za-z ]+$/;
+                  
+           if (!validCharacters.test(input.value)) {
+              document.getElementById("fhname_error").textContent = "Please enter alphabets only.";
+               input.value = input.value.replace(/[^A-Za-z ]/g, '');
+          } else {
+                   document.getElementById("fhname_error").textContent = "";
+              }
+           }
+          </script>
+
+          <div style="display: flex; align-items: center; gap: 10px;">
+          <label style="font-size: 15px;"><b>Email :</b></label><br>
+          <textarea rows="2" cols="30" id="email" placeholder="Email" style="font-size: 14px;" required oninput="validateEmail(this)"></textarea>
+          </div>
+          <span id="email_error" style="color: red;"></span>
+          <script>
+          function validateEmail(input){
+          var email = document.getElementById('email').value;
+          if(email == ""){
+                   document.getElementById("email_error").textContent = "**Please fill the email field";
+                   return false;
+              }
+          if(email.indexOf('@') <= 0){
+                   document.getElementById("email_error").textContent = "**Invalid email format";
+                   return false;
+                  }
+                              
+          if(email.indexOf('@') !== email.lastIndexOf('@')){
+                   document.getElementById("email_error").textContent = "**Email should contain only one '@' symbol";
+                   return false;
+              }
+                      
+                              
+          if(email.indexOf('gmail.com') === -1 && email.indexOf('gmail.in') === -1 && email.indexOf('gmail.org') === -1) {
+                  document.getElementById("email_error").textContent = "**Invalid email extension. Please use '.com' or '.in' or '.org'";
+                      return false; 
+               }
+                  document.getElementById("email_error").textContent = "";
+                      return true;
+                      }
+          </script>
+
+          <div style="display: flex; align-items: center; gap: 10px;">
+          <label style="font-size: 15px;"><b>Address :</b></label><br>
+          <textarea rows="2" cols="30"  id="address" placeholder="Address" style="font-size: 14px;" required></textarea>
+          <div style="margin-top: 5px; font-size:18px;" id="address"></div>  
+        </div>
+         
+          <div style="display: flex; align-items: center; gap: 10px;">
+          <label style="font-size: 15px;"><b>Phone_No :</b></label><br>
+          <textarea rows="2" cols="30" id="phone" placeholder="Phone No" style="font-size: 14px;" required pattern="[0-9]{10}" oninvalid="this.setCustomValidity('Please enter only numbers not alphabets.')" oninput="this.setCustomValidity(''); validatePhone(this);"></textarea><br>
+          <div style="margin-top: 5px; font-size:18px; color:red;" id="pno_error"></div>
+          </div>
+          <span id="pno_error" style="color: red;"></span><br>
+          <script>
+               function validatePhone(input) {
+              const regex = /\D/g;
+              if (regex.test(input.value)) {
+                    document.getElementById("pno_error").textContent = "Please enter only numbers.";
+                  } else {
+                   document.getElementById("pno_error").textContent = "";
+                          }
+                   input.value = input.value.replace(regex, '').slice(0, 10);
+                        }
+          </script>
+        
+        <h2 style="color: blue; font-size: 17px;";><u>Objective:</u></h2>
+        <textarea rows="4" cols="50" id="object" placeholder="Write about your objective" style="font-size: 14px;" ></textarea>
+        <hr>
+        <div class="qualification">
+        <h2 style="color: blue; font-size: 17px;"><u>Qualification:</u></h2>
+        <table id="myTable" style="width: 98%">
+          <col width="160">
+          <tr>
+            <th style="font-size: 15px;">Class</th>
+            <th style="font-size: 15px;">Year of passing</th>
+            <th style="font-size: 15px;">Board/University</th>
+            <th style="font-size: 15px;">CGPA</th>
+          </tr>
+          <col width="170">
+          <tr>
+            <td id="class">10<sup>th</sup></td>
+            <td><input type="date" class="table_input" id="year1" placeholder="Enter passing year" min="1970-12-31" max="2023-12-30" /></td>
+            <td><input type="text" class="table_input1" id="bu1" placeholder="Enter B/U Name" onkeyup="lettersAndSpacesOnly(this)" /></td>
+            <script>
+              function lettersAndSpacesOnly(input){
+                   var regex = /[^a-zA-Z\s]/gi;
+                   input.value = input.value.replace(regex,"");
+               }
+          </script>
+            <td><input type="text" class="table_input" id="per1" placeholder="Enter CGPA (1.0-10.0)" min="1.0" max="10.0" step="0.01" required oninput="validatePercentage(this)" /></td>
+            <span id="per1_error_template1" style="color: red;"></span>
+            <script>
+              function validatePercentage(input) {
+                var value = parseFloat(input.value);
+                var decimalCount = (input.value.split('.')[1] || []).length;
+    
+                 if (isNaN(value) || value < 1.0 || value > 10.0 || decimalCount > 2) {
+                  document.getElementById("per1_error_template1").textContent =
+                    "Please enter a valid CGPA number (1.0-10.0) with up to 2 decimal places.";
+                  input.value = "";
+                 } else {
+                   document.getElementById("per1_error_template1").textContent = "";
+              }
+            }
+        </script>
+          </tr>
+          <col width="200">
+          <tr>
+            <td>12<sup>th</sup></td>
+            <td><input type="date" class="table_input" id="year2" placeholder="Enter passing year" min="1970-12-31" max="2023-12-30" /></td>
+            <td><input type="text" class="table_input1" id="bu2" placeholder="Enter B/U Name" onkeyup="lettersAndSpacesOnly(this)" /></td>
+            <script>
+              function lettersAndSpacesOnly(input){
+                   var regex = /[^a-zA-Z\s]/gi;
+                   input.value = input.value.replace(regex,"");
+               }
+          </script>
+            <td><input type="text" class="table_input" id="per2" placeholder="Enter CGPA (1.0-10.0)" min="1.0" max="10.0" step="0.01" required oninput="validatePercentage(this)" /></td>
+            <span id="per2_error_template1" style="color: red;"></span>
+            <script>
+              function validatePercentage(input) {
+                var value = parseFloat(input.value);
+                var decimalCount = (input.value.split('.')[1] || []).length;
+    
+                 if (isNaN(value) || value < 1.0 || value > 10.0 || decimalCount > 2) {
+                  document.getElementById("per2_error_template1").textContent =
+                    "Please enter a valid CGPA number (1.0-10.0) with up to 2 decimal places.";
+                  input.value = "";
+                 } else {
+                   document.getElementById("per2_error_template1").textContent = "";
+              }
+            }
+        </script>
+          </tr>
+          <col width="350">
+          <tr>
+            <td>Graduation</td>
+            <td><input type="date" class="table_input" id="year3" placeholder="Enter passing year" min="1970-12-31" max="2023-12-30" /></td>
+            <td><input type="text" class="table_input" id="bu3" placeholder="Enter B/U Name" onkeyup="lettersAndSpacesOnly(this)" /></td>
+            <script>
+              function lettersAndSpacesOnly(input){
+                   var regex = /[^a-zA-Z\s]/gi;
+                   input.value = input.value.replace(regex,"");
+               }
+             </script>
+            <td><input type="text" class="table_input" id="per3" placeholder="Enter CGPA (1.0-10.0)" min="1.0" max="10.0" step="0.01" required oninput="validatePercentage(this)" /></td>
+            <span id="per3_error_template1" style="color: red;"></span>
+            <script>
+              function validatePercentage(input) {
+                var value = parseFloat(input.value);
+                var decimalCount = (input.value.split('.')[1] || []).length;
+    
+                 if (isNaN(value) || value < 1.0 || value > 10.0 || decimalCount > 2) {
+                  document.getElementById("per3_error_template1").textContent =
+                    "Please enter a valid CGPA number (1.0-10.0) with up to 2 decimal places.";
+                  input.value = "";
+                 } else {
+                   document.getElementById("per3_error_template1").textContent = "";
+              }
+            }
+           </script>
+          </tr>
+
+          <col width="170">
+          <tr>
+            <td>Post-Graduation</td>
+            <td><input type="date" class="table_input" id="year4" placeholder="Enter passing year" min="1970-12-31" max="2023-12-30" /></td>
+            <td><input type="text" class="table_input" id="bu4" placeholder="Enter B/U Name" onkeyup="lettersAndSpacesOnly(this)" /></td>
+            <script>
+              function lettersAndSpacesOnly(input){
+                   var regex = /[^a-zA-Z\s]/gi;
+                   input.value = input.value.replace(regex,"");
+               }
+           </script>
+            <td><input type="text" class="table_input" id="per4" placeholder="Enter CGPA (1.0-10.0)" min="1.0" max="10.0" step="0.01" required oninput="validatePercentage(this)" /></td>
+            <span id="per4_error_template1" style="color: red;"></span>
+            <script>
+              function validatePercentage(input) {
+                var value = parseFloat(input.value);
+                var decimalCount = (input.value.split('.')[1] || []).length;
+    
+                 if (isNaN(value) || value < 1.0 || value > 10.0 || decimalCount > 2) {
+                  document.getElementById("per4_error_template1").textContent =
+                    "Please enter a valid CGPA number (1.0-10.0) with up to 2 decimal places.";
+                  input.value = "";
+                 } else {
+                   document.getElementById("per4_error_template1").textContent = "";
+                }
+              }
+            </script>
+           </tr>
+         </table>
+        </div>
+        
+        <hr>
+        <h2 style="color: blue; font-size: 17px;";><u>Experience:</u></h2>
+        <div class="experience">
+        <ul id="experienceList">
+        <li><textarea rows="2" cols="50" placeholder="Experience 1" style="font-size: 14px;"></textarea></li>
+        <li><textarea rows="2" cols="50" placeholder="Experience 2" style="font-size: 14px;"></textarea></li>
+          <!-- Add more li elements for additional bullet points -->
+       </ul>
+       </div>
+
+       <hr>
+        <h2 style="color: blue; font-size: 17px;";><u>Technical-skills:</u></h2>
+        <div class="techskill">
+            <ul id="techskillList">
+        <li><textarea rows="2" cols="50"  placeholder="technical skill 1" style="font-size: 14px;" ></textarea></li>
+        <li><textarea rows="2" cols="50"  placeholder="technical skill 2" style="font-size: 14px;" ></textarea></li>
+        <li><textarea rows="2" cols="50"  placeholder="technical skill 3" style="font-size: 14px;" ></textarea></li>
+        <li><textarea rows="2" cols="50"  placeholder="technical skill 4" style="font-size: 14px;" ></textarea></li>
+        </ul>
+        </div>
+
+        <hr>
+        <h2 style="color: blue; font-size: 17px;";><u>Achievements:</u></h2>
+        <div class="achivements">
+          <ul id="achivementsList">
+        <li><textarea rows="2" cols="50"  placeholder="achievement 1" style="font-size: 14px;" ></textarea></li>
+        <li><textarea rows="2" cols="50"  placeholder="achievement 2" style="font-size: 14px;" ></textarea></li>
+        <li><textarea rows="2" cols="50"  placeholder="achievement 3" style="font-size: 14px;" ></textarea></li>
+        <li><textarea rows="2" cols="50"  placeholder="achievement 4" style="font-size: 14px;" ></textarea></li>
+        </ul>
+        </div>
+
+        <hr>
+        <h2 style="color: blue; font-size: 17px;";><u>Interests/Hobbies:</u></h2>
+        <div class="hobbies">
+          <ul id="hobbiesList">
+        <li><textarea rows="2" cols="50"  placeholder="hobbies 1" style="font-size: 14px;" ></textarea></li>
+        <li><textarea rows="2" cols="50"  placeholder="hobbies 2" style="font-size: 14px;" ></textarea></li>
+        <li><textarea rows="2" cols="50"  placeholder="hobbies 3" style="font-size: 14px;" ></textarea></li>
+        <li><textarea rows="2" cols="50"  placeholder="hobbies 4" style="font-size: 14px;" ></textarea></li>
+        </ul>
+        </div>
+        
+        <hr>
+        <h2 style="color: blue; font-size: 17px;";><u>Truth declaration:</u></h2>
+        <textarea rows="3" cols="50" id="declaration" placeholder="Write about your declaration"></textarea>
+        <br><br>
+        
+      </div>
+    </div>
+    <div class="template" id="template2">
+      <h3>Template 2</h3>
+      <div class="template2"> <!-- Use the same class as Template 1 -->
+        <div style="display: flex; align-items: center; gap: 10px;">
+          <label style="font-size: 15px;"><b>First-Name :</b></label><br>
+          <textarea rows="2" cols="30" id="f_name" placeholder="First Name" style="font-size: 14px;" required oninput="validateFirstName(this)"></textarea>
+          <div style="margin-top: 5px; font-size:18px; color:red;" id="fname_error"></div>
+          </div>
+          <span id="fname_error" style="color: red;"></span>
+          <script>
+              function validateFirstName(input) {
+                  var validCharacters = /^[A-Za-z ]+$/;
+          
+                  if (!validCharacters.test(input.value)) {
+                      document.getElementById("fname_error").textContent = "Please enter alphabets only.";
+                      input.value = input.value.replace(/[^A-Za-z ]/g, '');
+                  } else {
+                      document.getElementById("fname_error").textContent = "";
+                  }
+              }
+          </script>
+      
+          <div style="display: flex; align-items: center; gap: 10px;">
+          <label  style="font-size: 15px;"><b>Last-Name :</b></label><br>
+          <textarea rows="2" cols="30" id="l_name" placeholder="Last Name" style="font-size: 14px;" required oninput="validateLastName(this)"></textarea>
+          <div style="margin-top: 5px; font-size:18px; color:red;" id="lname_error"></div>
+          </div>
+              
+          <span id="lname_error" style="color: red;"></span>
+          <script>
+            function validateLastName(input) {
+                var validCharacters = /^[A-Za-z ]+$/;
+              
+                if (!validCharacters.test(input.value)) {
+                    document.getElementById("lname_error").textContent = "Please enter alphabets only.";
+                    input.value = input.value.replace(/[^A-Za-z ]/g, '');
+                  } else {
+                    document.getElementById("lname_error").textContent = "";
+                }
+              }
+          </script>
+
+          <div style="display: flex; align-items: center; gap: 10px;">   
+          <label  style="font-size: 15px;"><b>Father-Name :</b></label><br>
+          <textarea rows="2" cols="30" id="ft_name" placeholder="Father's Name" style="font-size: 14px;" required oninput="validateFatherName(this)"></textarea>
+          <div style="margin-top: 5px; font-size:18px; color:red;" id="fhname_error"></div>
+          </div>
+         
+          <span id="fhname_error" style="color: red;"></span>
+          <script>
+          function validateFatherName(input) {
+          var validCharacters = /^[A-Za-z ]+$/;
+                  
+           if (!validCharacters.test(input.value)) {
+              document.getElementById("fhname_error").textContent = "Please enter alphabets only.";
+               input.value = input.value.replace(/[^A-Za-z ]/g, '');
+          } else {
+                   document.getElementById("fhname_error").textContent = "";
+              }
+           }
+          </script>
+
+          <div style="display: flex; align-items: center; gap: 10px;">
+          <label style="font-size: 15px;"><b>Email :</b></label><br>
+          <textarea rows="2" cols="30" id="email" placeholder="Email"style="font-size: 14px;" required oninput="validateEmail(this)"></textarea>
+          </div>
+          <span id="email_error" style="color: red;"></span>
+                      
+          <script>
+          function validateEmail(input){
+          var email = document.getElementById('email').value;
+          if(email == ""){
+                   document.getElementById("email_error").textContent = "**Please fill the email field";
+                   return false;
+              }
+          if(email.indexOf('@') <= 0){
+                   document.getElementById("email_error").textContent = "**Invalid email format";
+                   return false;
+                  }
+                              
+          if(email.indexOf('@') !== email.lastIndexOf('@')){
+                   document.getElementById("email_error").textContent = "**Email should contain only one '@' symbol";
+                   return false;
+              }
+                      
+                              
+          if(email.indexOf('gmail.com') === -1 && email.indexOf('gmail.in') === -1 && email.indexOf('gmail.org') === -1) {
+                  document.getElementById("email_error").textContent = "**Invalid email extension. Please use '.com' or '.in' or '.org'";
+                      return false; 
+               }
+                  document.getElementById("email_error").textContent = "";
+                      return true;
+                      }
+          </script>
+
+          <div style="display: flex; align-items: center; gap: 10px;">
+          <label style="font-size: 15px;"><b>Address :</b></label><br>
+          <textarea rows="2" cols="30"  id="address" placeholder="Address" style="font-size: 14px;" required></textarea>
+          </div>
+         
+          <div style="display: flex; align-items: center; gap: 10px;">
+          <label style="font-size: 15px;"><b>Phone_No :</b></label><br>
+          <textarea rows="2" cols="30" id="phone" placeholder="Phone No" style="font-size: 14px;" required pattern="[0-9]{10}" oninvalid="this.setCustomValidity('Please enter only numbers not alphabets.')" oninput="this.setCustomValidity(''); validatePhone(this);"></textarea><br>
+          <div style="margin-top: 5px; font-size:18px; color:red;" id="pno_error"></div>
+          </div>
+          <span id="pno_error" style="color: red;"></span><br>
+          <script>
+               function validatePhone(input) {
+              const regex = /\D/g;
+              if (regex.test(input.value)) {
+                    document.getElementById("pno_error").textContent = "Please enter only numbers.";
+                  } else {
+                   document.getElementById("pno_error").textContent = "";
+                          }
+                   input.value = input.value.replace(regex, '').slice(0, 10);
+                        }
+          </script>
+        
+        <h2 style="color: blue; font-size: 17px;";><u>Objective:</u></h2>
+        <textarea rows="4" cols="50" id="object" placeholder="Write about your objective" style="font-size: 14px;"></textarea>
+        
+        <hr>
+        <div class="Education">
+        <h2 style="color: blue"><u>Education:</u></h2>
+        <div class="education">
+          <ul id="educationList">
+        <li>10th Class-CGPA : 
+          <textarea rows="1" cols="20"  placeholder="Enter CGPA (1.0-10.0)" min="1.0" max="10.0" step="0.01" required oninput="validatePercentage(this)" style="font-size: 14px;"></textarea>
+        </li>
+        <li>12th Class-CGPA :
+          <textarea rows="1" cols="20"  placeholder="Enter CGPA (1.0-10.0)" min="1.0" max="10.0" step="0.01" required oninput="validatePercentage(this)" style="font-size: 14px;"></textarea>
+        </li>
+        <li >Graduation-CGPA :
+          <textarea rows="1" cols="20"  placeholder="Enter CGPA (1.0-10.0)" min="1.0" max="10.0" step="0.01" required oninput="validatePercentage(this)"style="font-size: 14px;"></textarea>
+        </li>
+        
+        </ul>
+        </div>
+
+        <hr>
+        <h2 style="color: blue; font-size: 17px;";><u>Skills:</u></h2>
+        <div class="Skills">
+        <ul id="skillsList">
+        <li><textarea rows="2" cols="50" placeholder="Skill 1" style="font-size: 14px;"></textarea></li>
+        <li><textarea rows="2" cols="50" placeholder="Skill 2" style="font-size: 14px;"></textarea></li>
+        <li><textarea rows="2" cols="50" placeholder="Skill 3" style="font-size: 14px;"></textarea></li>
+        <li><textarea rows="2" cols="50" placeholder="Skill 4" style="font-size: 14px;"></textarea></li>
+        </div>
+
+        <hr>
+        <h2 style="color: blue; font-size: 17px;";><u>Experience:</u></h2>
+        <div class="experience">
+        <ul id="experienceList">
+        <li><textarea rows="2" cols="50" placeholder="Experience 1" style="font-size: 14px;"></textarea></li>
+        <li><textarea rows="2" cols="50" placeholder="Experience 2" style="font-size: 14px;"></textarea></li>
+          <!-- Add more li elements for additional bullet points -->
+       </ul>
+       </div>
+
+       <hr>
+        <h2 style="color: blue; font-size: 17px;";><u>Technical-skills:</u></h2>
+        <div class="techskill">
+            <ul id="techskillList">
+        <li><textarea rows="2" cols="50"  placeholder="technical skill 1" style="font-size: 14px;" ></textarea></li>
+        <li><textarea rows="2" cols="50"  placeholder="technical skill 2" style="font-size: 14px;" ></textarea></li>
+        <li><textarea rows="2" cols="50"  placeholder="technical skill 3" style="font-size: 14px;" ></textarea></li>
+        <li><textarea rows="2" cols="50"  placeholder="technical skill 4" style="font-size: 14px;" ></textarea></li>
+        </ul>
+        </div>
+
+        <hr>
+        <h2 style="color: blue; font-size: 17px;";><u>Achievements:</u></h2>
+        <div class="achivements">
+          <ul id="achivementsList">
+        <li><textarea rows="2" cols="50"  placeholder="achievement 1" style="font-size: 14px;" ></textarea></li>
+        <li><textarea rows="2" cols="50"  placeholder="achievement 2" style="font-size: 14px;" ></textarea></li>
+        <li><textarea rows="2" cols="50"  placeholder="achievement 3" style="font-size: 14px;" ></textarea></li>
+        <li><textarea rows="2" cols="50"  placeholder="achievement 4" style="font-size: 14px;" ></textarea></li>
+        </ul>
+        </div>
+
+        <hr>
+        <h2 style="color: blue; font-size: 17px;";><u>Interests/Hobbies:</u></h2>
+        <div class="hobbies">
+          <ul id="hobbiesList">
+        <li><textarea rows="2" cols="50"  placeholder="hobbies 1" style="font-size: 14px;" ></textarea></li>
+        <li><textarea rows="2" cols="50"  placeholder="hobbies 2" style="font-size: 14px;" ></textarea></li>
+        <li><textarea rows="2" cols="50"  placeholder="hobbies 3" style="font-size: 14px;" ></textarea></li>
+        <li><textarea rows="2" cols="50"  placeholder="hobbies 4" style="font-size: 14px;" ></textarea></li>
+        </ul>
+        </div>
+        
+        <hr>
+        <h2 style="color: blue; font-size: 17px;";><u>Truth declaration:</u></h2>
+        <textarea rows="3" cols="50" id="declaration" placeholder="Write about your declaration" style="font-size: 14px;"></textarea>
+        <br><br>
+      </div>
+    </div>
+  </div>
+  <a href="#" id="download" onclick="downloadResume()">Download</a>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.5/jspdf.min.js"></script>
+  <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+
+  <script>
+    var templates = [
+      {
+        id: "template1",
+        html: document.getElementById("template1").innerHTML
+      },
+      {
+        id: "template2",
+        html: document.getElementById("template2").innerHTML
+      },
+    ];
+
+    var currentTemplate = 0;
+
+    function showTemplate(templateIndex) {
+      var container = document.getElementsByClassName("template");
+      for (var i = 0; i < container.length; i++) {
+        container[i].classList.remove("active");
+      }
+      container[templateIndex].classList.add("active");
+      currentTemplate = templateIndex;
+    }
+
+    function downloadResume() {
+      var template = templates[currentTemplate].html;
+      var fileName = "resume.pdf";
+
+      // Use HTML2Canvas to capture the template content as an image
+      html2canvas(document.querySelector('.template.active'), {
+        scale: 2,
+        useCORS: true
+      }).then(function(canvas) {
+        // Convert the captured image to data URL
+        var imgData = canvas.toDataURL('image/png');
+
+        // Create a new jsPDF instance
+        var pdf = new jsPDF();
+
+        // Add the captured image to the PDF
+        pdf.addImage(imgData, 'PNG', 0, 0, 210, 297);
+
+        // Save the PDF
+        pdf.save(fileName);
+      });
+    }
+  </script>
+</body>
+</html>
